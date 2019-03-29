@@ -7,7 +7,7 @@ plt.style.use("ggplot")
 
 # Define the variable and the function to approximate
 x = sy.Symbol('x')
-f = sin(x)
+f = numpy.exp(x)
 
 # Factorial function
 def factorial(n):
