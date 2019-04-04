@@ -16,7 +16,9 @@ y_lendement=regression_model.predict([[20]])
 plt.ylim((81600,82100))
 
 print ("Consomation du lendemain est de "+str(y_lendement[0][0]))
-
+#Affichage du points de prédiction
+plt.scatter([[20]], y_lendement,color='green')
+#Affichage des points
 plt.scatter(x, y)
 plt.xlabel('x')
 plt.ylabel('y')
