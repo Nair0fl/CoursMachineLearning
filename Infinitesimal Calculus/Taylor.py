@@ -48,5 +48,9 @@ def plot():
     plt.grid(True)
     plt.title('Taylor series approximation')
     plt.show()
-
-plot()
+    
+def main():
+    plot()
+    
+if __name__ == "__main__":
+    main()

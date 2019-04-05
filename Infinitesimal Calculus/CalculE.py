@@ -18,4 +18,4 @@ while(True):
     if(round(numpy.log(a),precision)==logE):
         break;
     i+=1
-print("Valeur de e : "+a)
+print("Valeur de e : "+str(a))
