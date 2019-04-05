@@ -13,8 +13,7 @@ data = digits['data']
 target  = digits['target']
 
 classes = set(target)
-
-
+print(target)
 x_train, x_test, y_train, y_test = train_test_split(data, target, test_size=0.2)
 logisticRegr = LogisticRegression()
 logisticRegr.fit(x_train, y_train)
