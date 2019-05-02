@@ -48,28 +48,42 @@ def entrainement(images,resultats,network):
 
 def set_poids(neuron,image):
     for index,pixel in enumerate(image):
-        if pixel>0 and neuron[index]<255:
-            neuron[index]+=1
-        elif neuron[index]>0:
-            neuron[index]-=1
+        if pixel>0 and neuron[index]+10<255:
+            neuron[index]+=10
+        elif neuron[index]-10>0:
+            neuron[index]-=10
     return neuron
 
+def display_fit(network):
+    vertical_1 = np.vstack((np.uint8(network[0]).reshape((8, 8)), np.uint8(network[5]).reshape((8, 8))))
+    vertical_2 = np.vstack((np.uint8(network[1]).reshape((8, 8)), np.uint8(network[6]).reshape((8, 8))))
+    vertical_3 = np.vstack((np.uint8(network[2]).reshape((8, 8)), np.uint8(network[7]).reshape((8, 8))))
+    vertical_4 = np.vstack((np.uint8(network[3]).reshape((8, 8)), np.uint8(network[8]).reshape((8, 8))))
+    vertical_5 = np.vstack((np.uint8(network[4]).reshape((8, 8)), np.uint8(network[9]).reshape((8, 8))))
 
+    img = np.hstack((vertical_1, vertical_2, vertical_3,
+                    vertical_4, vertical_5))
+
+    img = cv2.resize(np.uint8(img), (960, 384), interpolation = cv2.INTER_AREA)
+
+    cv2.imshow('image', img)
+    
 def main():    
     x_train, x_test, y_train, y_test = creer_dataset()
     network=create_network()
     network=entrainement(x_train,y_train,network)
+    display_fit(network)
     correct_prediction=0
     number_of_tests=0
     for index,test in enumerate(x_test):
         a=predire([test],network)
         print(f"prediction : {a}")
         print(f"resultat : {y_test[index]}")
-
         if a==y_test[index]:
             correct_prediction+=1
         number_of_tests+=1
     print(f"Predict percent : {(correct_prediction/number_of_tests) * 100}%")
-
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
 if __name__ == "__main__":
 	main()
