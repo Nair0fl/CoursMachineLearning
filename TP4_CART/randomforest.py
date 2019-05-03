@@ -1,5 +1,6 @@
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
+from timeit import default_timer as timer
 
 class randomforest:
     def __init__(self,data, target, test_size=0.2):
@@ -22,5 +23,14 @@ class randomforest:
 
     
     def run(self):
+        print("random")
+        timer_start_fit = timer()
+        lr=self.create_forest()
+        timer_end_fit = timer()
+        timer_start_predict = timer()
+        stat=self.predict(lr)
+        timer_end_predict = timer()
+        print("Temps entrainement : "+str(round(timer_end_fit - timer_start_fit, 6)))
+        print("Temps prediction : "+str(round(timer_end_predict - timer_start_predict, 6)))
         forest=self.create_forest()
-        return self.predict(forest)
+        return stat
